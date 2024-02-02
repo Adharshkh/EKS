@@ -43,3 +43,11 @@ module "jenkins" {
   subnet_id = module.vpc.aws_public_subnet
   ami_id = var.ami_id
   }
+
+  module "ecr" {
+  source = "./modules/ecr"
+  enabled = var.enable_ecr
+  enable_lifecycle_policy = var.enable_lifecycle_policy
+  image_names             = var.ecr_repo_names
+  image_tag_mutability    = var.image_tag_mutability
+}
