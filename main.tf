@@ -28,8 +28,16 @@ module "vpc" {
 
 }
 
-module "bastionhost" {
-  source = "./modules/bastionhost"
+module "jenkins" {
+  source = "./modules/jenkins"
+  vpc_id = module.vpc.vpc_id
+  key_name = var.key_name
+  subnet_id = module.vpc.aws_public_subnet
+  ami_id = var.ami_id
+  }
+
+  module "bastionvpn" {
+  source = "./modules/jenkins"
   vpc_id = module.vpc.vpc_id
   key_name = var.key_name
   subnet_id = module.vpc.aws_public_subnet
