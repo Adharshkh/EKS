@@ -37,7 +37,7 @@ module "jenkins" {
   }
 
   module "bastionvpn" {
-  source = "./modules/jenkins"
+  source = "./modules/bastion-vpn"
   vpc_id = module.vpc.vpc_id
   key_name = var.key_name
   subnet_id = module.vpc.aws_public_subnet
