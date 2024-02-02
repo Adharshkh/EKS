@@ -1,9 +1,9 @@
-cluster_name = "sanjaycluster"
+cluster_name = "Warlord"
 key_pair = "key1"
 instance_types = ["t3.medium"]
-node_group_name = "sanjay-cluster-node-group"
+node_group_name = "Warlord-cluster-node-group"
 public_access_cidrs = ["0.0.0.0/0"]
-tags = "cluster-vpc"
+tags = "Warlord-cluster-vpc"
 vpc_cidr = "10.0.0.0/16"
 instance_tenancy = "default"
 public_sn_count = "2"
