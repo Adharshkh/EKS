@@ -17,12 +17,10 @@ data "aws_ami" "ubuntu" {
     values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
   }
 }
+
 data "template_file" "userdata" {
   template = file("./userdata2.tpl")
 }
-
-
-
 
 resource "aws_instance" "bastion_host" {
   ami           = var.ami_id
@@ -30,11 +28,9 @@ resource "aws_instance" "bastion_host" {
   key_name      = var.key_name
   subnet_id     = var.subnet_id[0]
   user_data = data.template_file.userdata.rendered
-
   vpc_security_group_ids = [
     aws_security_group.bastion_sg.id
   ]
-
   tags = {
     Name = "Bastion Host"
   }

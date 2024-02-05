@@ -1,4 +1,5 @@
-#######modules/vpc/main.tf
+#######modules/vpc/main.tf##################
+
 resource "aws_vpc" "cloudquicklabs" {
   cidr_block       = var.vpc_cidr 
   instance_tenancy = var.instance_tenancy
@@ -9,7 +10,6 @@ resource "aws_vpc" "cloudquicklabs" {
 
 resource "aws_internet_gateway" "cloudquicklabs_gw" {
   vpc_id = aws_vpc.cloudquicklabs.id
-
   tags = {
     Name = var.tags
   }
@@ -17,7 +17,6 @@ resource "aws_internet_gateway" "cloudquicklabs_gw" {
 
 data "aws_availability_zones" "available" {
 }
-
 
 resource "random_shuffle" "az_list" {
   input        = data.aws_availability_zones.available.names
@@ -34,7 +33,6 @@ resource "aws_subnet" "public_cloudquicklabs_subnet" {
     Name = var.tags
   }
 }
-
 
 resource "aws_default_route_table" "internal_cloudquicklabs_default" {
   default_route_table_id = aws_vpc.cloudquicklabs.default_route_table_id

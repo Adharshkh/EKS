@@ -17,12 +17,10 @@ data "aws_ami" "ubuntu" {
     values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
   }
 }
+
 data "template_file" "userdata" {
   template = file("./userdata1.tpl")
 }
-
-
-
 
 resource "aws_instance" "bastion_host" {
   ami           = var.ami_id
@@ -30,19 +28,17 @@ resource "aws_instance" "bastion_host" {
   key_name      = var.key_name
   subnet_id     = var.subnet_id[0]
   user_data = data.template_file.userdata.rendered
-
   vpc_security_group_ids = [
     aws_security_group.bastion_sg.id
   ]
-
   tags = {
     Name = "Bastion Host"
   }
 }
 
 resource "aws_security_group" "bastion_sg" {
-  name        = "bastion_sg"
-  description = "Security group for Bastion Host"
+  name        = "Jenkins_sg"
+  description = "Security group for jenkins server"
   vpc_id      = var.vpc_id
 
   ingress {
@@ -51,10 +47,19 @@ resource "aws_security_group" "bastion_sg" {
     protocol    = "tcp"
     cidr_blocks = var.allowed_cidr_blocks
   }
+
   ingress {
     description = "Allow HTTPS"
     from_port   = 443
     to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    description = "Allow HTTP"
+    from_port   = 80
+    to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -67,6 +72,6 @@ resource "aws_security_group" "bastion_sg" {
   }
 
   tags = {
-    Name = "Bastion SG"
+    Name = "Jenkins SG"
   }
 }

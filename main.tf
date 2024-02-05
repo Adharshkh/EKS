@@ -25,7 +25,6 @@ module "vpc" {
   public_cidrs            = var.public_cidrs
   map_public_ip_on_launch = var.map_public_ip_on_launch
   rt_route_cidr_block     = var.rt_route_cidr_block
-
 }
 
 module "jenkins" {
