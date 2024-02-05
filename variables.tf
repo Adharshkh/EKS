@@ -15,12 +15,12 @@ variable "access_ip" {}
 variable "scaling_desired_size" {}
 variable "scaling_max_size" {}
 variable "scaling_min_size" {}
-variable "map_public_ip_on_launch" {
+variable "map_public_ip_on_launch" {}
 
-}
 variable "key_name" {
   description = "Key name of the Key Pair to use for the instance"
 }
+
 variable "ami_id" {
   description = "The AMI to be used for the bastion host"
 }

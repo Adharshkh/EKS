@@ -16,7 +16,6 @@ scaling_min_size = "3"
 map_public_ip_on_launch = "true"
 key_name = "key1"
 ami_id = "ami-05fb0b8c1424f266b"
-
 #ecr variables
 enable_ecr              = true
 enable_lifecycle_policy = true

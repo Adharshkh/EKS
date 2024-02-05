@@ -1,3 +1,4 @@
+
 module "eks" {
   source                  = "./modules/eks"
   aws_public_subnet       = module.vpc.aws_public_subnet
@@ -35,7 +36,7 @@ module "jenkins" {
   ami_id = var.ami_id
   }
 
-  module "bastionvpn" {
+module "bastionvpn" {
   source = "./modules/bastion-vpn"
   vpc_id = module.vpc.vpc_id
   key_name = var.key_name
@@ -43,7 +44,7 @@ module "jenkins" {
   ami_id = var.ami_id
   }
 
-  module "ecr" {
+module "ecr" {
   source = "./modules/ecr"
   enabled = var.enable_ecr
   enable_lifecycle_policy = var.enable_lifecycle_policy
