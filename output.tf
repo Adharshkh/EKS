@@ -7,6 +7,9 @@ output "igw_id" {
 output "public_subnet_ids" {
   value = module.dynamic_subnets.public_subnet_ids
 }
+output "public_subnet_cidrs" {
+  value = module.dynamic_subnets.public_subnet_cidrs
+}
 output "private_subnet_ids" {
   value = module.dynamic_subnets.private_subnet_ids
 }

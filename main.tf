@@ -92,7 +92,7 @@ module "eks_cluster" {
   subnet_ids              = module.dynamic_subnets.private_subnet_ids
   kubernetes_version      = var.kubernetes_version
   endpoint_private_access = var.endpoint_private_access
-  allowed_cidr_blocks     = module.dynamic_subnets.private_subnet_cidrs
+  allowed_cidr_blocks     = module.dynamic_subnets.public_subnet_cidrs
   oidc_provider_enabled   = var.oidc_provider_enabled
   #workers_role_arns          = [module.eks_node_group.eks_node_group_role_arn]
   workers_security_group_ids = []
