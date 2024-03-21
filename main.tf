@@ -155,28 +155,28 @@ module "jenkins_server" {
 }
 
 
-module "sonarqube" {
-  source = "./modules/terraform-aws-ec2-bastion-server"
+# module "sonarqube" {
+#   source = "./modules/terraform-aws-ec2-bastion-server"
 
-  name                          = var.sonarqube_name
-  vpc_id                        = module.vpc.vpc_id
-  ami                           = var.sonarqube_ami
-  subnets                       = module.dynamic_subnets.public_subnet_ids[0]
-  instance_type                 = var.sonarqube_instance_type
-  assign_eip_address            = var.assign_eip_address
-  associate_public_ip_address   = var.associate_public_ip_address
-  key_name                      = module.aws_key_pair.key_name
-  user_data_template            = var.sonarqube_user_data_template
-  create_default_security_group = var.sonarqube_create_default_security_group
-  allowed_ports                 = var.sonarqube_allowed_ports
-  allowed_ports_udp             = var.sonarqube_allowed_ports_udp
-  ingress_cidr_blocks           = var.sonarqube_ingress_cidr_blocks
+#   name                          = var.sonarqube_name
+#   vpc_id                        = module.vpc.vpc_id
+#   ami                           = var.sonarqube_ami
+#   subnets                       = module.dynamic_subnets.public_subnet_ids[0]
+#   instance_type                 = var.sonarqube_instance_type
+#   assign_eip_address            = var.assign_eip_address
+#   associate_public_ip_address   = var.associate_public_ip_address
+#   key_name                      = module.aws_key_pair.key_name
+#   user_data_template            = var.sonarqube_user_data_template
+#   create_default_security_group = var.sonarqube_create_default_security_group
+#   allowed_ports                 = var.sonarqube_allowed_ports
+#   allowed_ports_udp             = var.sonarqube_allowed_ports_udp
+#   ingress_cidr_blocks           = var.sonarqube_ingress_cidr_blocks
 
-  tags = {
-    Environment   = "production"
-    Resource_type = "ec2"
-    Terraform     = "true"
-    server        = "sonarqube_server"
-  }
-  depends_on = [module.bastion]
-}
+#   tags = {
+#     Environment   = "production"
+#     Resource_type = "ec2"
+#     Terraform     = "true"
+#     server        = "sonarqube_server"
+#   }
+#   depends_on = [module.bastion]
+# }

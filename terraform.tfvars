@@ -28,7 +28,7 @@ user_data_template            = "user_data/pritunl.sh"
 create_default_security_group = true
 allowed_ports                 = [22, 80, 443]
 allowed_ports_udp             = [13633]
-ingress_cidr_blocks           = ["0.0.0.0/0"]
+ingress_cidr_blocks           = ["103.141.54.90/32"]
 
 #ecr variables
 enable_ecr              = true
@@ -47,8 +47,8 @@ endpoint_private_access = true
 #eks node group variables
 
 eks_nodegroup_instance_type = ["t3.medium"]
-desired_size                = 2
-min_size                    = 2
+desired_size                = 1
+min_size                    = 1
 max_size                    = 3
 capacity_type               = "ON_DEMAND"
 cluster_autoscaler_enabled  = true

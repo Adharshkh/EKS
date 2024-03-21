@@ -13,7 +13,7 @@ resource "aws_security_group_rule" "managed_ingress_security_groups" {
   description              = "Allow inbound traffic from existing Security Groups"
   from_port                = 0
   to_port                  = 65535
-  protocol                 = "-1"
+  protocol                 = "tcp"
   source_security_group_id = local.allowed_security_group_ids[count.index]
   security_group_id        = local.cluster_security_group_id
   type                     = "ingress"
@@ -23,9 +23,9 @@ resource "aws_security_group_rule" "managed_ingress_cidr_blocks" {
   count = local.managed_security_group_rules_enabled && length(var.allowed_cidr_blocks) > 0 ? 1 : 0
 
   description       = "Allow inbound traffic from CIDR blocks"
-  from_port         = 0
-  to_port           = 65535
-  protocol          = "-1"
+  from_port         = 80
+  to_port           = 443
+  protocol          = "tcp"
   cidr_blocks       = var.allowed_cidr_blocks
   security_group_id = local.cluster_security_group_id
   type              = "ingress"
@@ -67,7 +67,7 @@ resource "aws_security_group_rule" "egress" {
   description       = "Allow all egress traffic"
   from_port         = 0
   to_port           = 0
-  protocol          = "-1"
+  protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = local.security_group_id
   type              = "egress"
@@ -79,7 +79,7 @@ resource "aws_security_group_rule" "ingress_workers" {
   description              = "Allow the cluster to receive communication from the worker nodes"
   from_port                = 0
   to_port                  = 65535
-  protocol                 = "-1"
+  protocol                 = "tcp"
   source_security_group_id = var.workers_security_group_ids[count.index]
   security_group_id        = local.security_group_id
   type                     = "ingress"
@@ -91,7 +91,7 @@ resource "aws_security_group_rule" "ingress_security_groups" {
   description              = "Allow inbound traffic from existing Security Groups"
   from_port                = 0
   to_port                  = 65535
-  protocol                 = "-1"
+  protocol                 = "tcp"
   source_security_group_id = var.allowed_security_groups[count.index]
   security_group_id        = local.security_group_id
   type                     = "ingress"
@@ -102,8 +102,8 @@ resource "aws_security_group_rule" "ingress_cidr_blocks" {
 
   description       = "Allow inbound traffic from CIDR blocks"
   from_port         = 0
-  to_port           = 65535
-  protocol          = "-1"
+  to_port           = 443
+  protocol          = "tcp"
   cidr_blocks       = var.allowed_cidr_blocks
   security_group_id = local.security_group_id
   type              = "ingress"
